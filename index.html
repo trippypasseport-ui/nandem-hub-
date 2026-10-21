@@ -108,13 +108,14 @@
   /* ---------- Présentation ---------- */
   section{ padding: clamp(4rem, 10vw, 7.5rem) var(--gutter); }
   .wrap{ max-width: 66rem; margin: 0 auto; }
-  .who{ position: relative; overflow: hidden; isolation: isolate; background: var(--night); padding-top: 15rem; }
+  .who{ position: relative; overflow: hidden; isolation: isolate; background: var(--night); padding-top: 14rem; scroll-margin-top: 0; }
   .who .wrap{ position: relative; }
-  .who p{
-    margin: 0 auto; max-width: 38rem; font-weight: 300; font-size: clamp(1.55rem, 3.4vw, 2.05rem);
-    line-height: 1.42; text-wrap: balance; text-align: center;
-  }
-  .who em{ color: var(--gold-bright); }
+  .who-text{ max-width: 36rem; }
+  .who h2{ margin: 0 0 1.1rem; font-weight: 400; font-size: clamp(2rem, 4.2vw, 2.9rem); line-height: 1.12; }
+  .who p{ margin: 0 0 1.1rem; font-size: 1.2rem; line-height: 1.65; color: var(--ivory); }
+  .who .who-quote{ margin-top: 1.6rem; font-style: italic; font-weight: 300; font-size: 1.3rem; color: var(--gold-bright); }
+  .textlink{ display: inline-block; margin-top: 0.6rem; font-size: 1.1rem; color: var(--ivory); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 0.35em; text-decoration-thickness: 1px; padding: 0.4rem 0; }
+  .textlink:hover{ color: var(--gold-bright); }
   .bg{ position: absolute; inset: 0 0 auto 0; height: 16rem; z-index: -1; }
   .bg img{ width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; display: block; }
   .bg::after{ content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,10,28,.3), rgba(18,10,28,0) 30%, var(--night) 100%); }
@@ -123,7 +124,6 @@
     .bg{ inset: 0; height: auto; }
     .bg img{ object-position: right center; }
     .bg::after{ background: linear-gradient(90deg, var(--night) 0%, rgba(18,10,28,.92) 32%, rgba(18,10,28,0) 66%), linear-gradient(180deg, var(--night) 0%, rgba(18,10,28,0) 18%, rgba(18,10,28,0) 82%, var(--dusk) 100%); }
-    .who p{ margin: 0; text-align: left; max-width: 34rem; }
   }
 
   /* ---------- Choix de la porte ---------- */
@@ -231,16 +231,22 @@
   </div>
   <div class="hero-copy">
     <h1 class="hook">Et si rien n'était vraiment <em>séparé&nbsp;?</em></h1>
-    <p class="lead">NANDÈM est un territoire à explorer à travers un livre, de la musique et un chemin au quotidien. Choisissez votre porte d'entrée.</p>
-    <a class="cta" href="#choix" id="enter" data-track="entrer_nandem">Entrer dans NANDÈM</a>
+    <p class="lead">NANDÈM est une invitation à regarder le monde depuis un autre point de vue, là où la science, la conscience et la poésie se rencontrent. On y entre par un livre, de la musique ou des vidéos.</p>
+    <a class="cta" href="#univers" id="enter" data-track="entrer_nandem">Entrer dans NANDÈM</a>
   </div>
 </header>
 
 <main>
-  <section class="who">
+  <section class="who" id="univers" aria-labelledby="univers-title">
     <div class="bg" aria-hidden="true"><img src="/nandem-1400.webp" srcset="/nandem-800.webp 800w, /nandem-1400.webp 1400w" sizes="100vw" width="1400" height="933" alt="" loading="lazy"></div>
     <div class="wrap">
-      <p>Je suis NANDÈM, le territoire qui vit au fond de vous, celui que peu prennent le temps d'explorer vraiment. Pas une croyance à adopter. Pas une vérité à suivre. <em>Rien d'autre que vous-même, enfin rencontré.</em></p>
+      <div class="who-text">
+        <h2 id="univers-title">Qu'est-ce que NANDÈM&nbsp;?</h2>
+        <p>Tout part d'une question : et si rien n'était vraiment séparé ? La science et les traditions anciennes, l'esprit et la nature, vous et le monde. NANDÈM explore cette idée avec des mots, des sons et des images, sans rien imposer.</p>
+        <p>Il y a trois portes : un livre pour comprendre, de la musique pour relier, un chemin pour explorer au quotidien. Aucun ordre à respecter. Choisissez celle qui vous attire.</p>
+        <p class="who-quote">Je suis NANDÈM, le territoire qui vit au fond de vous, celui que peu prennent le temps d'explorer vraiment. Pas une croyance à adopter. Pas une vérité à suivre. Rien d'autre que vous-même, enfin rencontré.</p>
+        <a class="textlink" href="#choix" data-track="choisir_porte">Choisir ma porte</a>
+      </div>
     </div>
   </section>
 
@@ -351,10 +357,6 @@
       });
     });
     select(0, false);
-    var enter = document.getElementById("enter");
-    if(enter) enter.addEventListener("click", function(){
-      setTimeout(function(){ var s = tabs.filter(function(t){ return t.getAttribute("aria-selected") === "true"; })[0]; if(s) s.focus({ preventScroll: true }); }, 600);
-    });
   })();
 </script>
 </body>

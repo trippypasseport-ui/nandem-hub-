@@ -108,19 +108,30 @@
   /* ---------- Présentation ---------- */
   section{ padding: clamp(4rem, 10vw, 7.5rem) var(--gutter); }
   .wrap{ max-width: 66rem; margin: 0 auto; }
-  .who{ background: linear-gradient(180deg, var(--night), var(--dusk)); text-align: center; }
+  .who{ position: relative; overflow: hidden; isolation: isolate; background: var(--night); padding-top: 15rem; }
+  .who .wrap{ position: relative; }
   .who p{
-    margin: 0 auto; max-width: 38rem; font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 2.3rem);
-    line-height: 1.42; text-wrap: balance;
+    margin: 0 auto; max-width: 38rem; font-weight: 500; font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.38; text-wrap: balance; text-align: center;
   }
   .who em{ color: var(--gold-bright); }
+  .bg{ position: absolute; inset: 0 0 auto 0; height: 16rem; z-index: -1; }
+  .bg img{ width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; display: block; }
+  .bg::after{ content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,10,28,.3), rgba(18,10,28,0) 30%, var(--night) 100%); }
+  @media (min-width: 56rem){
+    .who{ padding-top: clamp(6rem, 12vw, 10rem); padding-bottom: clamp(6rem, 12vw, 10rem); }
+    .bg{ inset: 0; height: auto; }
+    .bg img{ object-position: right center; }
+    .bg::after{ background: linear-gradient(90deg, var(--night) 0%, rgba(18,10,28,.92) 32%, rgba(18,10,28,0) 66%), linear-gradient(180deg, var(--night) 0%, rgba(18,10,28,0) 18%, rgba(18,10,28,0) 82%, var(--dusk) 100%); }
+    .who p{ margin: 0; text-align: left; max-width: 34rem; }
+  }
 
   /* ---------- Choix de la porte ---------- */
-  .doors{ background: var(--dusk); scroll-margin-top: 0; }
+  .doors{ background: linear-gradient(180deg, var(--night) 0, var(--dusk) 14rem); scroll-margin-top: 0; }
   .doors h2{
     margin: 0 0 0.6rem; font-weight: 500; font-size: clamp(2.2rem, 4.6vw, 3.2rem); line-height: 1.1; text-align: center;
   }
-  .doors-sub{ margin: 0 auto clamp(2rem, 5vw, 3rem); max-width: 34rem; text-align: center; font-size: 1.3rem; color: var(--ivory-dim); }
+  .doors-sub{ margin: 0 auto clamp(2rem, 5vw, 3rem); max-width: 42rem; text-align: center; font-size: 1.3rem; color: var(--ivory-dim); }
 
   .tabs{ display: none; gap: 0.9rem; margin-bottom: 1.75rem; }
   .js .tabs{ display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -134,20 +145,43 @@
   .tab-hint{ display: block; margin-top: 0.4rem; font-size: 1.1875rem; line-height: 1.4; color: var(--ivory-dim); }
   .tab[aria-selected="true"]{ background: rgba(217,166,53,0.12); border-color: var(--gold); }
   .tab[aria-selected="true"] .tab-name{ color: var(--gold-bright); }
+  #tab-relier[aria-selected="true"]{ background: rgba(213,139,176,0.14); border-color: var(--rose); }
+  #tab-relier[aria-selected="true"] .tab-name{ color: #efb1cf; }
+  #tab-explorer[aria-selected="true"]{ background: rgba(185,162,236,0.14); border-color: #b9a2ec; }
+  #tab-explorer[aria-selected="true"] .tab-name{ color: #d3c4f7; }
+  #panel-relier .tag{ color: #efb1cf; }
+  #panel-explorer .tag{ color: #d3c4f7; }
 
   .panel{
-    padding: clamp(1.75rem, 4vw, 3rem); border-radius: 8px; border: 1px solid var(--hairline);
-    background: radial-gradient(ellipse 70% 90% at 15% 40%, rgba(217,166,53,0.13), transparent 70%), rgba(18,10,28,0.55);
+    position: relative; overflow: hidden; isolation: isolate; border-radius: 8px;
+    border: 1px solid var(--hairline); background: var(--night);
   }
   .panel + .panel{ margin-top: 1.5rem; }
   .panel[hidden]{ display: none; }
+  .panel-bg{ position: absolute; inset: 0 0 auto 0; height: 15rem; z-index: -1; }
+  .panel-bg img{ width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; display: block; }
+  .panel-bg::after{ content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,10,28,.3), rgba(18,10,28,0) 30%, var(--night) 100%); }
+  .panel-body{ padding: 11.5rem clamp(1.4rem, 5vw, 3rem) 2.25rem; }
+  .panel.enter{ animation: panelIn .8s ease both; }
+  @keyframes panelIn{ from{ opacity: 0; } to{ opacity: 1; } }
+  @media (min-width: 56rem){
+    .panel{ min-height: 34rem; display: flex; align-items: center; }
+    .panel-bg{ inset: 0; height: auto; }
+    .panel-bg img{ object-position: right center; }
+    .panel-bg::after{ background: linear-gradient(90deg, var(--night) 0%, rgba(18,10,28,.9) 30%, rgba(18,10,28,0) 62%), linear-gradient(180deg, rgba(18,10,28,.3) 0%, rgba(18,10,28,0) 24%, rgba(18,10,28,.45) 100%); }
+    .panel-body{ width: 60%; padding: 3.25rem clamp(2rem, 5vw, 4.5rem); }
+    #panel-comprendre .panel-body{ width: 68%; }
+    #panel-comprendre .panel-bg::after{ background: linear-gradient(90deg, var(--night) 0%, rgba(18,10,28,.94) 46%, rgba(18,10,28,0) 82%), linear-gradient(180deg, rgba(18,10,28,.3) 0%, rgba(18,10,28,0) 24%, rgba(18,10,28,.45) 100%); }
+    #panel-comprendre .btn{ white-space: nowrap; }
+    #panel-comprendre .cover{ width: 9rem; }
+  }
   .panel h3{ margin: 0; font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.7rem); line-height: 1.05; }
   .panel .tag{ margin: 0.7rem 0 0; font-style: italic; font-weight: 500; font-size: 1.55rem; color: var(--gold-bright); }
   .panel .desc{ margin: 1rem 0 0; max-width: 30rem; font-size: 1.3rem; color: var(--ivory-dim); }
 
   .book{ display: grid; grid-template-columns: auto 1fr; gap: clamp(1.75rem, 5vw, 4rem); align-items: center; }
   .cover{
-    display: block; width: clamp(9.5rem, 22vw, 14rem); height: auto; border-radius: 3px;
+    display: block; width: clamp(9rem, 16vw, 11.5rem); height: auto; border-radius: 3px;
     box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(242,199,102,0.25), 0 0 80px rgba(217,166,53,0.25);
   }
   .buy{ margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
@@ -204,6 +238,7 @@
 
 <main>
   <section class="who">
+    <div class="bg" aria-hidden="true"><img src="/nandem-1400.webp" srcset="/nandem-800.webp 800w, /nandem-1400.webp 1400w" sizes="100vw" width="1400" height="933" alt="" loading="lazy"></div>
     <div class="wrap">
       <p>Je suis NANDÈM, le territoire qui vit au fond de vous, celui que peu prennent le temps d'explorer vraiment. Pas une croyance à adopter. Pas une vérité à suivre. <em>Rien d'autre que vous-même, enfin rencontré.</em></p>
     </div>
@@ -230,7 +265,8 @@
       </div>
 
       <div class="panel" role="tabpanel" id="panel-comprendre" aria-labelledby="tab-comprendre">
-        <div class="book">
+        <div class="panel-bg" aria-hidden="true"><img src="/comprendre-1400.webp" srcset="/comprendre-800.webp 800w, /comprendre-1400.webp 1400w" sizes="(min-width: 56rem) 66rem, 100vw" width="1400" height="933" alt="" loading="lazy"></div>
+        <div class="panel-body"><div class="book">
           <img class="cover" src="/cover.webp" alt="Couverture du livre Par-delà le Voile" width="560" height="840" loading="lazy">
           <div>
             <h3>Par-delà le Voile</h3>
@@ -241,11 +277,12 @@
               <a class="btn btn-line" href="https://nandemo8.gumroad.com/l/xrnaut" target="_blank" rel="noopener" data-track="livre_gumroad_numerique">Télécharger la version numérique</a>
             </div>
           </div>
-        </div>
+        </div></div>
       </div>
 
       <div class="panel" role="tabpanel" id="panel-relier" aria-labelledby="tab-relier">
-        <div class="simple">
+        <div class="panel-bg" aria-hidden="true"><img src="/relier-1400.webp" srcset="/relier-800.webp 800w, /relier-1400.webp 1400w" sizes="(min-width: 56rem) 66rem, 100vw" width="1400" height="933" alt="" loading="lazy"></div>
+        <div class="panel-body"><div class="simple">
           <span class="simple-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="1.5" y="5" width="21" height="14" rx="4.5" fill="currentColor"/><path d="M10 8.7l6 3.3-6 3.3z" fill="#1d1230"/></svg></span>
           <div>
             <h3>La Route des Libres</h3>
@@ -253,11 +290,12 @@
             <p class="desc">La chaîne YouTube, le chemin vers l'univers NANDÈM.</p>
             <div class="buy"><a class="btn btn-gold" href="https://youtube.com/@laroutedeslibres" target="_blank" rel="noopener" data-track="youtube_route_des_libres">Écouter sur YouTube</a></div>
           </div>
-        </div>
+        </div></div>
       </div>
 
       <div class="panel" role="tabpanel" id="panel-explorer" aria-labelledby="tab-explorer">
-        <div class="simple">
+        <div class="panel-bg" aria-hidden="true"><img src="/explorer-1400.webp" srcset="/explorer-800.webp 800w, /explorer-1400.webp 1400w" sizes="(min-width: 56rem) 66rem, 100vw" width="1400" height="933" alt="" loading="lazy"></div>
+        <div class="panel-body"><div class="simple">
           <span class="simple-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16.3" r="3" fill="currentColor"/><path d="M10 18V4.5C10.5 7 13 8.8 17 9V13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
           <div>
             <h3>TikTok</h3>
@@ -265,7 +303,7 @@
             <p class="desc">Des vidéos courtes, un rappel simple au quotidien.</p>
             <div class="buy"><a class="btn btn-gold" href="https://www.tiktok.com/@la.route.des.libr?_r=1&amp;_t=ZN-99NJccrj3OI" target="_blank" rel="noopener" data-track="tiktok">Voir les vidéos</a></div>
           </div>
-        </div>
+        </div></div>
       </div>
     </div>
   </section>
@@ -291,24 +329,25 @@
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
     var panels = tabs.map(function(t){ return document.getElementById(t.getAttribute("aria-controls")); });
     if(!tabs.length) return;
-    function select(i, focus){
+    function select(i, focus, animate){
       tabs.forEach(function(t, k){
         var on = k === i;
         t.setAttribute("aria-selected", on ? "true" : "false");
         t.tabIndex = on ? 0 : -1;
         panels[k].hidden = !on;
+        if(on && animate){ panels[k].classList.remove("enter"); void panels[k].offsetWidth; panels[k].classList.add("enter"); }
       });
       if(focus) tabs[i].focus({ preventScroll: true });
     }
     tabs.forEach(function(t, i){
-      t.addEventListener("click", function(){ select(i, false); });
+      t.addEventListener("click", function(){ select(i, false, true); });
       t.addEventListener("keydown", function(e){
         var n = tabs.length, j = null;
         if(e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % n;
         else if(e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + n) % n;
         else if(e.key === "Home") j = 0;
         else if(e.key === "End") j = n - 1;
-        if(j !== null){ e.preventDefault(); select(j, true); }
+        if(j !== null){ e.preventDefault(); select(j, true, true); }
       });
     });
     select(0, false);
